@@ -1,0 +1,9 @@
+youtube_transcript_api
+nltk
+scikit-learn
+shelfdb
+shelfquery
+flask
+flask-restful
+pystemmer
+transformers
