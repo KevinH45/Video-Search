@@ -13,11 +13,10 @@ def findRelatedVideo(query, db):
 
         sim = findSimilarity(query, i["rawtext"], vect)
 
-        if sim>maxSim:
+        if sim > maxSim:
             maxSim, relContent = sim, i
 
     return relContent
-
 
 
 def findSentences(query, relContent):
@@ -33,13 +32,10 @@ def findSentences(query, relContent):
 
         sim = findSimilarity(query, i, vect)
 
-        if sim>60:
-            res.append((timedText[idx]['start'], timedText[idx]["duration"]+timedText[idx]['start']))
+        if sim > 60:
+            res.append((timedText[idx]['start'], timedText[idx]
+                       ["duration"]+timedText[idx]['start']))
 
-        idx+=1
+        idx += 1
 
     return res
-
-
-
-
