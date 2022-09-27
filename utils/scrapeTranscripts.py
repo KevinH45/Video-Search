@@ -11,7 +11,6 @@ with open("ytbase.txt", "r") as f:
         vid = i[32:].strip()
         transcript = YouTubeTranscriptApi.get_transcript(vid)
 
-
         text = [x["text"].replace("\n", " ") for x in transcript]
 
         db.shelf("prodDB").insert({
@@ -20,5 +19,3 @@ with open("ytbase.txt", "r") as f:
             'content': text,
             'rawtext': ' '.join(text),
         }).run()
-
-

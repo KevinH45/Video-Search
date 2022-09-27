@@ -4,8 +4,10 @@ from config import Config
 from resources.base import QueryResource, VideoResource
 from extensions import db
 
+
 def register_extensions(app):
-   db.sync()
+    db.sync()
+
 
 def create_app():
     app = Flask("aE5tSQPC51AFDUzOE3U3t5Ddz")
@@ -16,11 +18,13 @@ def create_app():
 
     return app
 
+
 def register_resources(app):
     api = Api(app)
 
     api.add_resource(QueryResource, "/api/query")
     api.add_resource(VideoResource, "/api/videos")
+
 
 if __name__ == '__main__':
     app = create_app()

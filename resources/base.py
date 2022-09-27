@@ -5,6 +5,7 @@ from query import findRelatedVideo, findSentences
 from extensions import db
 from youtube_transcript_api import YouTubeTranscriptApi
 
+
 class QueryResource(Resource):
 
     def post(self):
@@ -19,7 +20,8 @@ class QueryResource(Resource):
         relContent = findRelatedVideo(query, db)
         times = findSentences(query, relContent)
 
-        return  {"msg": "Success", "video_id": relContent["title"], "times": times}, HTTPStatus.OK
+        return {"msg": "Success", "video_id": relContent["title"], "times": times}, HTTPStatus.OK
+
 
 class VideoResource(Resource):
 
@@ -44,5 +46,3 @@ class VideoResource(Resource):
         }).run()
 
         return {"msg": "Entered into db"}, HTTPStatus.CREATED
-
-
