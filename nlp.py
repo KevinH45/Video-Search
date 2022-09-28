@@ -1,3 +1,5 @@
+import string
+import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import Stemmer
@@ -12,6 +14,12 @@ class CustomTfidfVectorizer(TfidfVectorizer):
         analyzer = super(TfidfVectorizer, self).build_analyzer()
         return lambda doc: english_stemmer.stemWords(analyzer(doc))
 
+def preprocessText(s):
+
+    s = s.lower()
+    res = re.sub("[^a-zA-Z]", " ", s)
+
+    return res
 
 def findSimilarity(query, s2, vect):
 
