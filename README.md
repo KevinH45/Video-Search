@@ -26,11 +26,11 @@ Here's a [YouTube demo](https://youtu.be/ZQ8ux00RJkw) of the code - please read 
 ## Query Search Algorithm
 
 The query search algorithm follows a few simple steps:
-- Beforehand, we have saved a collection of YouTube transcripts in our document DB
-- We are given a query via a POST request to ```/api/query```
+- Beforehand, we have saved a collection of YouTube transcripts in our document DB.
+- We are given a query via a POST request to ```/api/query```.
 - As preprocessing, we remove all non-alphabetic characters and stem the query.
 - We run the query through the collection of YT transcripts using TF-IDF Vectorization and Cosine Similarity. The document most similar to the query is selected as the "target" document.
-- We run the query through each individual spoken phrase of the target document, and use a Multi-QA MiniLM model to encode the phrases and query.
+- We use the Multi-QA MiniLM model to encode the individual spoken phrases and query.
 - We use cosine similarity to determine the phrase most similar to the query, and reference the transcript to find an accurate time for the phrase.
 
 
