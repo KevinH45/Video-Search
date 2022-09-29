@@ -1,4 +1,4 @@
-from nlp import findSimilarity, CustomTfidfVectorizer, preprocessText
+from nlp import findSimilarity, CustomTfidfVectorizer, preprocessText, semanticSearch
 import shelfquery
 
 
@@ -21,21 +21,17 @@ def findRelatedVideo(query, db):
 
 def findSentences(query, relContent):
 
-    vect = CustomTfidfVectorizer()
-    query = vect.fit_transform([preprocessText(query)])
-    sentences = relContent["rawtext"].split(".")
+    query = preprocessText(query)
+    sentences = [x["text"] for x in relContent["transcript"]]
     timedText = relContent["transcript"]
 
-    res = []
-    idx = 0
-    for i in sentences:
+    answer = semanticSearch(query, sentences)
+    res = None
+    for i in timedText:
 
-        sim = findSimilarity(query, preprocessText(i), vect)
+        if i["text"] == answer:
+            res = i["start"]
+            break
 
-        if sim > 60:
-            res.append((timedText[idx]['start'], timedText[idx]
-                       ["duration"]+timedText[idx]['start']))
 
-        idx += 1
-
-    return res
+    return [res]

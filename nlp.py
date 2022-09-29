@@ -2,6 +2,8 @@ import string
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from extensions import model
+from sentence_transformers import util
 import Stemmer
 
 english_stemmer = Stemmer.Stemmer('en')
@@ -20,6 +22,17 @@ def preprocessText(s):
     res = re.sub("[^a-zA-Z]", " ", s)
 
     return res
+
+def semanticSearch(query,docs):
+
+    queryEmb = model.encode(query)
+    docsEmb = model.encode(docs)
+
+    scores = util.cos_sim(queryEmb, docsEmb)[0].cpu().tolist()
+
+    scores = list(zip(docs, scores, docsEmb))
+    scores = sorted(scores, key=lambda x: x[1], reverse=True)
+    return scores[0][0]
 
 def findSimilarity(query, s2, vect):
 

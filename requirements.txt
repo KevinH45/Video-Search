@@ -6,4 +6,4 @@ shelfquery
 flask
 flask-restful
 pystemmer
-transformers
+sentence-transformers
