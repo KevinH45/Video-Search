@@ -20,21 +20,21 @@ Here's a [YouTube demo](https://youtu.be/ZQ8ux00RJkw) of the code - please read 
 - [YoutubeTranscriptAPI](https://github.com/jdepoix/youtube-transcript-api)
 - [Scikit-Learn](https://scikit-learn.org/stable/index.html)
 - [SentenceTransformers](https://huggingface.co/sentence-transformers/multi-qa-MiniLM-L6-cos-v1)
-- Other dependencies can be found in ```requirements.txt```
+- Other dependencies can be found in `requirements.txt`
 - YT Videos mostly from TedTalks, Tom Scott, and StatQuest (because of their high-quality subtitling and somewhat technical nature)
 
 ## Query Search Algorithm
 
 The query search algorithm follows a few simple steps:
+
 - Beforehand, we have saved a collection of YouTube transcripts in our document DB.
-- We are given a query via a POST request to ```/api/query```.
+- We are given a query via a POST request to `/api/query`.
 - As preprocessing, we remove all non-alphabetic characters and stem the query.
 - We run the query through the collection of YT transcripts using TF-IDF Vectorization and Cosine Similarity. The document most similar to the query is selected as the "target" document.
 - We use the Multi-QA MiniLM model to encode the individual spoken phrases and query.
 - We use cosine similarity to determine the phrase most similar to the query, and reference the transcript to find an accurate time for the phrase.
 
-
 ## Usage guide
 
-- Send a POST Request at ```/api/videos``` to submit a new video
-- Send a POST Request at ```/api/query``` to search for a video + timestamps
+- Send a POST Request at `/api/videos` to submit a new video
+- Send a POST Request at `/api/query` to search for a video + timestamps
