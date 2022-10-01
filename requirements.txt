@@ -9,3 +9,4 @@ sentence-transformers
 shelfdb
 shelfquery
 youtube_transcript_api
+pyfiglet

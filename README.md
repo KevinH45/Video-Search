@@ -12,7 +12,7 @@ There are a few existing solutions that do this, most notably what is built by G
 
 We propose a command line tool that can be used to extract the text from previously-indexed YouTube videos in our database and be able to search through the text and return the relevant timestamp where content of the query is present. This will allow employees to search through the text of the video and get the relevant timestamp where the content is present.
 
-Here's a [YouTube demo](https://youtu.be/ZQ8ux00RJkw) of the code - please read the description for more details.
+Here's a [YouTube demo](https://youtu.be/CKQpgVe40bQ) of the code - please read the description for more details.
 
 ## Dependencies and resources
 
