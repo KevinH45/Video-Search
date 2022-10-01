@@ -38,3 +38,8 @@ The query search algorithm follows a few simple steps:
 
 - Send a POST Request at `/api/videos` to submit a new video
 - Send a POST Request at `/api/query` to search for a video + timestamps
+
+### OR
+
+- Run: ```python cli.py --query "query goes here"``` to search for a video + timestamps
+- Run: ```python cli.py --add "video id goes here"``` to add new videos
