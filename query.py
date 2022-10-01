@@ -31,8 +31,8 @@ def findSentences(query, relContent):
 
         if i["text"] == answer:
             res = i["start"]
-
+            tmp = i["duration"]
             break
 
 
-    return [res]
+    return [res, res+tmp]

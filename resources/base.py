@@ -20,7 +20,8 @@ class QueryResource(Resource):
         relContent = findRelatedVideo(query, db)
         times = findSentences(query, relContent)
 
-        return {"msg": "Success", "video_id": relContent["title"], "times": times}, HTTPStatus.OK
+        link = "https://www.youtube.com/watch?"+"v="+relContent["title"]+"&t="+str(int(times[0]))
+        return {"msg": "Success", "link": link, "video_id": relContent["title"], "times": times}, HTTPStatus.OK
 
 
 class VideoResource(Resource):
