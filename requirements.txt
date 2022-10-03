@@ -2,11 +2,12 @@ argparse
 flask
 flask-restful
 nltk
+pyfiglet
 pystemmer
+query
 requests
 scikit-learn
 sentence-transformers
 shelfdb
 shelfquery
 youtube_transcript_api
-pyfiglet

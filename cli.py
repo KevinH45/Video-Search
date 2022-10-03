@@ -1,5 +1,3 @@
-# Basic command line interface for the program
-
 import argparse
 import sys
 import requests
@@ -20,44 +18,38 @@ def main():
         parser.print_help(sys.stderr)
         sys.exit(1)
 
+    # TODO: Add the ability to add a video to the index and search for a query
+
+    if args.query:
+        print(f"Searching for {args.query}...")
+
+        try:
+            response = requests.post(
+                "http://127.0.0.1:5000/api/query", json={"query": args.query})
+            response.raise_for_status()
+        except requests.RequestException:
+            print("An error occurred while querying!")
+            sys.exit(1)
+
+        results = response.json()
+        if results:
+            print("Video link: ", results["link"])
+            print("Timestamps: ", results["times"])
+        else:
+            print("No results found! You can add a video to the index using --add")
+
     if args.add:
-        vid = args.add
-        try:
-            r = requests.post("http://127.0.0.1:5000/api/videos",
-                              json={"video": vid})
-        except requests.exceptions.ConnectionError:  # Database connection error
-            print("Error: Could not connect to the database. Is the server running?")
-            sys.exit(1)
-
-        # If the request was successful
-        if r.status_code == 201:
-            print("Video indexed successfully!")
-        else:  # If the request was unsuccessful
-            print("Error: ", r.status_code, r.reason)
-            print("URL: ", r.url)
-            sys.exit(1)
-
-    if args.query and not args.add:
-        query = args.query
+        print("Adding video: https://www.youtube.com/watch?v=" + args.add)
 
         try:
-            r = requests.post("http://127.0.0.1:5000/api/query",
-                              json={"query": query})
-        except requests.exceptions.ConnectionError:  # Database connection error
-            print("Error: Could not connect to the database. Is the server running?")
+            response = requests.post(
+                "http://localhost:5000/api/video", json={"video_id": args.add})
+            response.raise_for_status()
+        except requests.RequestException:
+            print("An error occurred while adding the video!")
             sys.exit(1)
 
-        # res = requests.post("http://127.0.0.1:5000/api/query",
-        #                     json={"query": query})
-
-        # If the request was successful, print the results
-        if r.status_code == 200:
-            print("Video ID: ", r.json()["video_id"])
-            print("Timestamps: ", str(r.json()["times"]))
-        else:  # If the request was unsuccessful
-            print("Error: ", r.status_code, r.reason)
-            print("URL: ", r.url)
-            sys.exit(1)
+        print("Video added successfully!")
 
 
 if __name__ == "__main__":
